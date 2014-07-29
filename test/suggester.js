@@ -1,6 +1,7 @@
 
 var suggester = require('../streams/suggester'),
     through = require('through2'),
+    generators = require('../lib/generators'),
     fixtures = require('./fixtures');
 
 module.exports.suggester = {};
@@ -14,7 +15,7 @@ module.exports.suggester.interface = function(test, common) {
 
 module.exports.suggester.contructor = function(test, common) {
   test('suggester()', function(t) {
-    var stream = suggester();
+    var stream = suggester( generators );
     t.equal(typeof stream._read, 'function', 'valid readable');
     t.equal(typeof stream._write, 'function', 'valid writeable');
     t.end();
@@ -24,7 +25,7 @@ module.exports.suggester.contructor = function(test, common) {
 // @note: test will fail if t.end is called multiple times
 module.exports.suggester.notsuggestable = function(test, common) {
   test('not suggestable', function(t) {
-    var stream = suggester();
+    var stream = suggester( generators );
     var record = { _meta: { suggestable: false } };
 
     // ensure 'invalid' event not emitted
@@ -48,7 +49,7 @@ module.exports.suggester.valid = function(test, common) {
   test('suggester should run', function(t) {
     
     fixtures.forEach( function( fixture, i ){
-      var stream = suggester();
+      var stream = suggester( generators );
 
       // @todo: better tests & code for when some of these
       // properties are incorrectly set.

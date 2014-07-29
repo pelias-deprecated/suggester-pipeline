@@ -1,11 +1,7 @@
  
 var through = require('through2');
-var generator = require('../lib/generators');
 
-function suggester( override ){
-
-  // allow overriding of generators
-  if( 'object' !== override ){ override = {}; }
+function suggester( generators ){
 
   var stream = through.obj( function( record, enc, done ) {
 
@@ -17,9 +13,9 @@ function suggester( override ){
 
     // build suggest input/payload/output
     record.suggest = {
-      input:   ( override.input   || generator.input   )( record ),
-      payload: ( override.payload || generator.payload )( record ),
-      output:  ( override.output  || generator.output  )( record )
+      input:   generators.input( record ),
+      payload: generators.payload( record ),
+      output:  generators.output( record )
     };
 
     this.push( record, enc );

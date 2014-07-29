@@ -1,5 +1,6 @@
 
-var bun = require('bun');
+var bun = require('bun'),
+    generators = require('./lib/generators');
 
 var suggester = {
   streams: {
@@ -10,7 +11,7 @@ var suggester = {
 
 suggester.pipeline = bun([
   suggester.streams.suggestable(),
-  suggester.streams.suggester()
+  suggester.streams.suggester( generators )
 ]);
 
 module.exports = suggester;
