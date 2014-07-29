@@ -27,6 +27,16 @@ module.exports.interface.pipeline = function(test, common) {
   });
 }
 
+module.exports.interface.generators = function(test, common) {
+  test('generators', function(t) {
+    t.equal(typeof suggester.generators, 'object', 'valid object');
+    t.equal(typeof suggester.generators.input, 'function', 'input generator');
+    t.equal(typeof suggester.generators.payload, 'function', 'payload generator');
+    t.equal(typeof suggester.generators.output, 'function', 'output generator');
+    t.end();
+  });
+}
+
 module.exports.all = function (tape, common) {
 
   function test(name, testFunction) {
