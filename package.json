@@ -1,0 +1,36 @@
+{
+  "name": "pelias-suggester-pipeline",
+  "author": "mapzen",
+  "version": "0.0.2",
+  "description": "Streaming geonames parser",
+  "homepage": "https://github.com/pelias/suggester-pipeline",
+  "license": "MIT",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test/run.js | tap-spec"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/pelias/suggester-pipeline.git"
+  },
+  "keywords": [
+    "geonames",
+    "stream",
+    "parser"
+  ],
+  "bugs": {
+    "url": "https://github.com/pelias/suggester-pipeline/issues"
+  },
+  "engines": {
+    "node": ">=0.10.26",
+    "npm": ">=1.4.3"
+  },
+  "dependencies": {
+    "bun": "0.0.10",
+    "through2": "^0.5.1"
+  },
+  "devDependencies": {
+    "tape": "^2.13.4",
+    "tap-spec": "^0.2.0"
+  }
+}

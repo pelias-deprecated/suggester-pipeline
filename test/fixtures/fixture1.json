@@ -1,0 +1,34 @@
+{
+  "input" : {
+    "_meta": {
+      "suggestable": true
+    },
+    "name": {
+      "default": "The o2",
+      "short": "o2",
+      "slang": "The dome"
+    },
+    "type": "bingo",
+    "id": "myid",
+    "center_point": {
+      "lat": 10,
+      "lon": 20
+    },
+    "admin0": "foo",
+    "admin1": "bar",
+    "admin2": "baz"
+  },
+  "output": {
+    "input": [
+      "the o2",
+      "o2",
+      "the dome",
+      "dome"
+    ],
+    "payload": {
+      "id": "bingo/myid",
+      "geo": "20,10"
+    },
+    "output": "The o2, baz, foo"
+  }
+}

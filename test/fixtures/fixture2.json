@@ -1,0 +1,30 @@
+{
+  "input" : {
+    "_meta": {
+      "suggestable": true
+    },
+    "name": {
+      "default": "East London",
+      "short": "Very East London"
+    },
+    "type": "bingo",
+    "id": "myid2",
+    "center_point": {
+      "lat": 10.555,
+      "lon": 20.10
+    },
+    "admin0": "admin0",
+    "admin2": "admin2"
+  },
+  "output": {
+    "input": [
+      "east london",
+      "very east london"
+    ],
+    "payload": {
+      "id": "bingo/myid2",
+      "geo": "20.1,10.555"
+    },
+    "output": "East London, admin2, admin0"
+  }
+}
