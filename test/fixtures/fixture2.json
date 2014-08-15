@@ -13,8 +13,8 @@
       "lat": 10.555,
       "lon": 20.10
     },
-    "admin0": "admin0",
-    "admin2": "admin2"
+    "admin0": "foo",
+    "admin2": "foo"
   },
   "output": {
     "input": [
@@ -25,6 +25,6 @@
       "id": "bingo/myid2",
       "geo": "20.1,10.555"
     },
-    "output": "East London, admin2, admin0"
+    "output": "East London, foo"
   }
 }
