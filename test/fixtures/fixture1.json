@@ -1,14 +1,14 @@
 {
   "input" : {
     "_meta": {
-      "suggestable": true
+      "suggestable": true,
+      "type": "osmnode"
     },
     "name": {
       "default": "The o2",
       "short": "o2",
       "slang": "The dome"
     },
-    "type": "bingo",
     "id": "myid",
     "center_point": {
       "lat": 10,
@@ -26,9 +26,10 @@
       "dome"
     ],
     "payload": {
-      "id": "bingo/myid",
+      "id": "osmnode/myid",
       "geo": "20,10"
     },
-    "output": "The o2, baz, foo"
+    "output": "The o2, baz, foo",
+    "weight": 6
   }
 }
