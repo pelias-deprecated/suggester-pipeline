@@ -1,13 +1,13 @@
 {
   "input" : {
     "_meta": {
-      "suggestable": true
+      "suggestable": true,
+      "type": "unknowntype"
     },
     "name": {
       "default": "East London",
       "short": "Very East London"
     },
-    "type": "bingo",
     "id": "myid2",
     "center_point": {
       "lat": 10.555,
@@ -22,7 +22,7 @@
       "very east london"
     ],
     "payload": {
-      "id": "bingo/myid2",
+      "id": "unknowntype/myid2",
       "geo": "20.1,10.555"
     },
     "output": "East London, foo"

@@ -11,7 +11,7 @@ module.exports.suggester.interface = function(test, common) {
     t.equal(typeof suggester, 'function', 'valid function');
     t.end();
   });
-}
+};
 
 module.exports.suggester.contructor = function(test, common) {
   test('suggester()', function(t) {
@@ -20,7 +20,7 @@ module.exports.suggester.contructor = function(test, common) {
     t.equal(typeof stream._write, 'function', 'valid writeable');
     t.end();
   });
-}
+};
 
 // @note: test will fail if t.end is called multiple times
 module.exports.suggester.notsuggestable = function(test, common) {
@@ -43,11 +43,11 @@ module.exports.suggester.notsuggestable = function(test, common) {
     // write an invalid record
     stream.write( record, 'utf8' );
   });
-}
+};
 
 module.exports.suggester.valid = function(test, common) {
   test('suggester should run', function(t) {
-    
+
     fixtures.forEach( function( fixture, i ){
       var stream = suggester( generators );
 
@@ -71,18 +71,18 @@ module.exports.suggester.valid = function(test, common) {
       // write a valid record
       stream.write( fixture.input, 'utf8' );
     });
-    
+
     t.end();
   });
-}
+};
 
 module.exports.all = function (tape, common) {
 
   function test(name, testFunction) {
-    return tape('suggester: ' + name, testFunction)
+    return tape('suggester: ' + name, testFunction);
   }
 
   for( var testCase in module.exports.suggester ){
     module.exports.suggester[testCase](test, common);
   }
-}
+};

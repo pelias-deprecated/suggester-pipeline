@@ -6,9 +6,11 @@ var common = {};
 var tests = [
   require('./interface.js'),
   require('./suggestable.js'),
-  require('./suggester.js')
+  require('./suggester.js'),
+  require('./lib/generators.js'),
+  require('./lib/weightGenerator.js')
 ];
 
 tests.map(function(t) {
-  t.all(tape, common)
+  t.all(tape, common);
 });

@@ -1,4 +1,4 @@
- 
+
 var through = require('through2');
 
 function suggester( generators ){
@@ -17,6 +17,11 @@ function suggester( generators ){
       payload: generators.payload( record ),
       output:  generators.output( record )
     };
+
+    var weight = generators.weight( record );
+    if( weight ){
+      record.suggest.weight = weight;
+    }
 
     this.push( record, enc );
     done();
