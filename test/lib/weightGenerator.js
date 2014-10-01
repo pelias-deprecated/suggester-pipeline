@@ -29,9 +29,21 @@ module.exports.tests.geoname = function(test, common) {
   });
 };
 
-module.exports.tests.admin2 = function(test, common) {
-  var record = { _meta: { type: 'admin2' } };
+module.exports.tests.admin_levels = function(test, common) {
+  test('admin0 type', function(t) {
+    var record = { _meta: { type: 'admin0' } };
+    var weight = weightGenerator( record );
+    t.equal(weight, 2, 'correct weight');
+    t.end();
+  });
+  test('admin1 type', function(t) {
+    var record = { _meta: { type: 'admin1' } };
+    var weight = weightGenerator( record );
+    t.equal(weight, 2, 'correct weight');
+    t.end();
+  });
   test('admin2 type', function(t) {
+    var record = { _meta: { type: 'admin2' } };
     var weight = weightGenerator( record );
     t.equal(weight, 2, 'correct weight');
     t.end();
