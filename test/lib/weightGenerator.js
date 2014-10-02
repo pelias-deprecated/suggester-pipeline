@@ -68,6 +68,16 @@ module.exports.tests.poi_address = function(test, common) {
   });
 };
 
+// some pipelines may return numeric ids
+module.exports.tests.numeric_id = function(test, common) {
+  var record = { _meta: { type: 'osmnode' }, id: 1 };
+  test('numeric id', function(t) {
+    var weight = weightGenerator( record );
+    t.equal(weight, 6, 'correct weight');
+    t.end();
+  });
+};
+
 module.exports.tests.locality = function(test, common) {
   var record = { _meta: { type: 'locality' } };
   test('locality type', function(t) {
