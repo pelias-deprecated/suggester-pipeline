@@ -33,13 +33,13 @@ module.exports.tests.admin_levels = function(test, common) {
   test('admin0 type', function(t) {
     var record = { _meta: { type: 'admin0' } };
     var weight = weightGenerator( record );
-    t.equal(weight, 14, 'correct weight');
+    t.equal(weight, 2, 'correct weight');
     t.end();
   });
   test('admin1 type', function(t) {
     var record = { _meta: { type: 'admin1' } };
     var weight = weightGenerator( record );
-    t.equal(weight, 12, 'correct weight');
+    t.equal(weight, 14, 'correct weight');
     t.end();
   });
   test('admin2 type', function(t) {
@@ -54,7 +54,7 @@ module.exports.tests.address = function(test, common) {
   var record = { _meta: { type: 'osmnode' }, id: 'something-address-foo' };
   test('address type', function(t) {
     var weight = weightGenerator( record );
-    t.equal(weight, 2, 'correct weight');
+    t.equal(weight, 4, 'correct weight');
     t.end();
   });
 };
@@ -63,7 +63,7 @@ module.exports.tests.poi_address = function(test, common) {
   var record = { _meta: { type: 'osmway' }, id: 'something-poi-address-foo' };
   test('poi_address type', function(t) {
     var weight = weightGenerator( record );
-    t.equal(weight, 6, 'correct weight');
+    t.equal(weight, 8, 'correct weight');
     t.end();
   });
 };
@@ -73,7 +73,7 @@ module.exports.tests.numeric_id = function(test, common) {
   var record = { _meta: { type: 'osmnode' }, id: 1 };
   test('numeric id', function(t) {
     var weight = weightGenerator( record );
-    t.equal(weight, 4, 'correct weight');
+    t.equal(weight, 6, 'correct weight');
     t.end();
   });
 };
@@ -82,7 +82,7 @@ module.exports.tests.locality = function(test, common) {
   var record = { _meta: { type: 'locality' } };
   test('locality type', function(t) {
     var weight = weightGenerator( record );
-    t.equal(weight, 10, 'correct weight');
+    t.equal(weight, 12, 'correct weight');
     t.end();
   });
 };
