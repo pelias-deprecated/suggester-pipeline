@@ -1,7 +1,7 @@
 {
   "name": "pelias-suggester-pipeline",
   "author": "mapzen",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "Streaming geonames parser",
   "homepage": "https://github.com/pelias/suggester-pipeline",
   "license": "MIT",
