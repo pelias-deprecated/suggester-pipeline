@@ -39,13 +39,13 @@ module.exports.tests.admin_levels = function(test, common) {
   test('admin1 type', function(t) {
     var record = { _meta: { type: 'admin1' } };
     var weight = weightGenerator( record );
-    t.equal(weight, 2, 'correct weight');
+    t.equal(weight, 14, 'correct weight');
     t.end();
   });
   test('admin2 type', function(t) {
     var record = { _meta: { type: 'admin2' } };
     var weight = weightGenerator( record );
-    t.equal(weight, 2, 'correct weight');
+    t.equal(weight, 12, 'correct weight');
     t.end();
   });
 };
