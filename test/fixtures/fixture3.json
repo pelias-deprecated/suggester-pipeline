@@ -34,11 +34,7 @@
     "input": [
       "marble hill"
     ],
-    "payload": {
-      "id": "osmnode/42455144",
-      "geo": "-73.91183330000001,40.874627800000006"
-    },
-    "output": "Marble Hill, Manhattan, NY",
+    "output": "osmnode:42455144",
     "weight": 6
   }
 }
