@@ -14,7 +14,6 @@ function suggester( generators ){
     // build suggest input/payload/output
     record.suggest = {
       input:   generators.input( record ),
-      payload: generators.payload( record ),
       output:  generators.output( record )
     };
 

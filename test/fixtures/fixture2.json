@@ -21,10 +21,6 @@
       "east london",
       "very east london"
     ],
-    "payload": {
-      "id": "unknowntype/myid2",
-      "geo": "20.1,10.555"
-    },
     "output": "East London, foo"
   }
 }
