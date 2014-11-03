@@ -34,7 +34,7 @@
     "input": [
       "marble hill"
     ],
-    "output": "Marble Hill, Manhattan, NY",
+    "output": "osmnode:42455144",
     "weight": 6
   }
 }

@@ -21,6 +21,6 @@
       "east london",
       "very east london"
     ],
-    "output": "East London, foo"
+    "output": "unknowntype:myid2"
   }
 }
