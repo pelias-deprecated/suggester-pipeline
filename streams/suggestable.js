@@ -6,7 +6,11 @@ var through = require('through2');
 
 function suggestable(){
 
-  var stream = through.obj( function( record, enc, done ) {
+  var stream = through.obj( function( record, enc, next ) {
+
+    var done = function(){
+      setImmediate( next );
+    };
 
     // Error if record is not a valid object
     if( 'object' !== typeof record ){
