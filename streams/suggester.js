@@ -3,7 +3,11 @@ var through = require('through2');
 
 function suggester( generators ){
 
-  var stream = through.obj( function( record, enc, done ) {
+  var stream = through.obj( function( record, enc, next ) {
+
+    var done = function(){
+      setImmediate( next );
+    };
 
     // skip suggester for records previously marked as suggestable=false
     if( true !== record._meta.suggestable ){

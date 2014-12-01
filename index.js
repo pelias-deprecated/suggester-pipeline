@@ -8,7 +8,7 @@ var suggester = {
     suggester: require('./streams/suggester')
   },
   generators: generators
-}
+};
 
 suggester.pipeline = bun([
   suggester.streams.suggestable(),
