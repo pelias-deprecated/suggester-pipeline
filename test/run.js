@@ -8,7 +8,6 @@ var tests = [
   require('./suggestable.js'),
   require('./suggester.js'),
   require('./lib/generators.js'),
-  require('./lib/outputSchema.js'),
   require('./lib/weightGenerator.js')
 ];
 
