@@ -7,7 +7,6 @@ module.exports.tests.interface = function(test, common) {
     t.equal(typeof generators, 'object', 'valid object');
     t.equal(typeof generators.input, 'function', 'valid function');
     t.equal(typeof generators.output, 'function', 'valid function');
-    t.equal(typeof generators.payload, 'function', 'valid function');
     t.equal(typeof generators.weight, 'function', 'valid function');
     t.end();
   });
