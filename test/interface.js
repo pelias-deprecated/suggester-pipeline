@@ -1,4 +1,3 @@
-
 var suggester = require('../');
 
 module.exports.interface = {};
@@ -6,10 +5,6 @@ module.exports.interface = {};
 module.exports.interface.streams = function(test, common) {
   test('streams', function(t) {
     t.equal(typeof suggester.streams, 'object', 'valid object');
-    t.end();
-  });
-  test('streams.suggestable', function(t) {
-    t.equal(typeof suggester.streams.suggestable, 'function', 'valid function');
     t.end();
   });
   test('streams.suggester', function(t) {

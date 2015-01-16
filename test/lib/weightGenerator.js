@@ -12,8 +12,8 @@ module.exports.tests.interface = function(test, common) {
 
 // unset type should yield default value
 module.exports.tests.unset_type = function(test, common) {
-  var record = {};
-  test('unset type', function(t) {
+  var record = { _meta: {} };
+    test('unset type', function(t) {
     var weight = weightGenerator( record );
     t.equal(weight, 0, 'default weight');
     t.end();

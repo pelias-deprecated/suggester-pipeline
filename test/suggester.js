@@ -22,29 +22,6 @@ module.exports.suggester.contructor = function(test, common) {
   });
 };
 
-// @note: test will fail if t.end is called multiple times
-module.exports.suggester.notsuggestable = function(test, common) {
-  test('not suggestable', function(t) {
-    var stream = suggester( generators );
-    var record = { _meta: { suggestable: false } };
-
-    // ensure 'invalid' event not emitted
-    stream.on( 'invalid', t.end );
-
-    // ensure error is not emitted
-    stream.on( 'error', t.end );
-
-    // suggester not run on records where _meta.suggestable!=true
-    stream.pipe( through.obj( function( chunk, enc, done ){
-      t.equal( chunk._meta.suggester, undefined, 'suggester not run' );
-      t.end();
-    }));
-
-    // write an invalid record
-    stream.write( record, 'utf8' );
-  });
-};
-
 module.exports.suggester.valid = function(test, common) {
   test('suggester should run', function(t) {
 
