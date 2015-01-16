@@ -1,12 +1,20 @@
+/**
+ * Tests for `./lib/generators.js`.
+ */
+
 var generators = require('../../lib/generators');
 
 tests = {};
 
 tests.interface = function(t) {
   t.equal(typeof generators, 'object', 'valid object');
-  t.equal(typeof generators.input, 'function', 'valid function');
-  t.equal(typeof generators.output, 'function', 'valid function');
-  t.equal(typeof generators.weight, 'function', 'valid function');
+  var expectedFuncProps = [ 'input', 'output', 'weight'];
+  expectedFuncProps.forEach( function ( funcName ){
+    t.ok( funcName in generators, 'contains ' + funcName );
+    t.equal(
+      typeof generators[ funcName ], 'function', funcName + ' is a function'
+    );
+  });
   t.end();
 };
 

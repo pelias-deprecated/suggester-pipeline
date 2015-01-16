@@ -14,19 +14,13 @@ tests[ 'exports an object with expected properties' ] = function(t) {
     typeof suggester.streams.suggester, 'function',
     '`suggester` is a valid function'
   );
+  t.equal(typeof suggester.generators, 'object', '`generators` is an object');
   t.end();
 };
 
 tests[ 'exports a valid `pipeline`' ] = function (t) {
   t.equal(typeof suggester.pipeline._read, 'function', 'is readable');
   t.equal(typeof suggester.pipeline._write, 'function', 'is writeable');
-  t.end();
-};
-
-tests[ '`generators` contains expected properties' ] = function(t) {
-  t.equal(typeof suggester.generators, 'object', 'is an object');
-  t.equal(typeof suggester.generators.input, 'function', 'has an `input`');
-  t.equal(typeof suggester.generators.output, 'function', 'has an `output`');
   t.end();
 };
 

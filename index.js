@@ -1,13 +1,12 @@
 var generators = require('./lib/generators');
+var suggester = require('./lib/suggester');
 
-/*
- * The schema of the exported object, thought it's now a little cumbersome, is
- * preserved for backwards compatibility.
- */
 var suggester = {
-  streams: { suggester: require('./lib/suggester') },
-  generators: generators
+  streams: {
+    suggester: suggester
+  },
+  generators: generators,
+  pipeline: suggester( generators )
 };
-suggester.pipeline = suggester.streams.suggester( generators );
 
 module.exports = suggester;
