@@ -5,43 +5,57 @@ var suggester = require('../lib/suggester'),
 
 tests = {};
 
-tests.suggester = function(t) {
-  t.equal(typeof suggester, 'function', 'valid function');
+tests[ 'valid `module.exports`' ] = function(t) {
+  t.equal(typeof suggester, 'function', 'is a function');
   t.end();
 };
 
-tests.contructor = function(t) {
+tests[ 'constructor returns expected stream' ] = function(t) {
   var stream = suggester( generators );
-  t.equal(typeof stream._read, 'function', 'valid readable');
-  t.equal(typeof stream._write, 'function', 'valid writeable');
+  t.equal(typeof stream._read, 'function', 'is readable');
+  t.equal(typeof stream._write, 'function', 'is writeable');
   t.end();
 };
 
-tests[ 'suggester should run' ] = function(t) {
-  // fixtures.forEach( function( fixture, i ){
-    // var stream = suggester( generators );
+tests[ 'suggester throws exception on bad properties' ] = function ( t ){
+  var suggesterStream = suggester();
+  var objects = [ {}, {type: ''}, {id: ''} ];
 
-    // // @todo: better tests & code for when some of these
-    // // properties are incorrectly set.
-    // // eg. type, id, center_point etc.
-    // t.equal( fixture.input._meta.suggestable, true, 'I screwed up the test' );
+  objects.forEach( function ( obj ){
+    t.throws(
+      suggesterStream.write.bind( null, obj ), null,
+      'Throws exception on objects without `_meta.id` or `_meta.type`.'
+    );
+  });
 
-    // // ensure 'invalid' event not emitted
-    // stream.on( 'invalid', t.end );
+  objects = [ {}, { name: { default: 1 } } ];
+  objects.forEach( function ( obj ){
+    t.throws(
+      suggesterStream.write.bind( null, obj ), null,
+      'Throws exception on objects without a `string` `name.default`.'
+    );
+  });
 
-    // // ensure error is not emitted
-    // stream.on( 'error', t.end );
+  t.end();
+};
 
-    // // ensure the suggest data is correct
-    // stream.pipe( through.obj( function( chunk, enc, done ){
-      // t.equal( typeof chunk.suggest, 'object', 'suggest object created' );
-      // t.deepEqual( chunk.suggest, fixture.output, 'fixture ' + (i+1) );
-    // }));
+tests[ 'suggester builds `suggest` property' ] = function ( t ){
+  var suggesterStream = suggester( generators );
+  var input = {
+    _meta: {
+      id: null,
+      type: null
+    },
+    name: {
+      default: ''
+    }
+  };
 
-    // // write a valid record
-    // stream.write( fixture.input, 'utf8' );
-  // });
-
+  suggesterStream.write( input );
+  var output = suggesterStream.read();
+  t.ok( 'suggest' in output, 'outbound record contains `suggest`' );
+  t.ok( 'input' in output.suggest, '`suggest` contains `input`.' );
+  t.ok( 'output' in output.suggest, '`suggest` contains `output`.' );
   t.end();
 };
 
