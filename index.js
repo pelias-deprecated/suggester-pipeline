@@ -5,7 +5,7 @@ var generators = require('./lib/generators');
  * preserved for backwards compatibility.
  */
 var suggester = {
-  streams: { suggester: require('./streams/suggester') },
+  streams: { suggester: require('./lib/suggester') },
   generators: generators
 };
 suggester.pipeline = suggester.streams.suggester( generators );
