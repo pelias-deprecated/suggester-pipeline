@@ -1,30 +1,33 @@
 var through = require('through2');
 
+/**
+ * Check an inbound record for the existence/type of specific proprties, and
+ * throw an exception if conditions are not satisfied. Used to identify older
+ * parts of the pipeline that don't use pelias-model and general incorrect
+ * objects. Meant to be used inside `suggester()`.
+ *
+ * @param {object} record An object written to the `suggester()` stream.
+ */
+function checkProperties( record ){
+  if( !( 'type' in record._meta && 'id' in record._meta ) ){
+    throw {
+      name: 'InvalidRecord',
+      message: 'Either `._meta.id` or `._meta.type` is undefined.'
+    }
+  }
+
+  if( typeof record.name.default !== 'string' ){
+    throw {
+      name: 'InvalidObject',
+      exception: 'Object\'s `name.default` is not a string.'
+    };
+  }
+}
+
 function suggester( generators ){
   var stream = through.obj( function( record, enc, next ) {
-    /**
-     * Older parts of the pipeline might still generate objects without `_meta`
-     * properties; throw an exception to identify them.
-     */
-    if( typeof record._meta !== 'object' ){
-      throw {
-        name: 'InvalidObject',
-        exception: 'Object has no `_meta` property.'
-      };
-    }
+    checkProperties( record );
 
-    /**
-     * Older parts of the pipeline might not generate `name.default`
-     * properties, or assign them values of now invalid types.
-     */
-    if( typeof record.name.default !== 'string' ){
-      throw {
-        name: 'InvalidObject',
-        exception: 'Object\'s `name.default` is not a string.'
-      };
-    }
-
-    // build suggest input/payload/output
     record.suggest = {
       input: generators.input( record ),
       output: generators.output( record )
@@ -35,9 +38,8 @@ function suggester( generators ){
       record.suggest.weight = weight;
     }
 
-    this.push( record, enc );
+    this.push( record );
     next();
-
   });
 
   // catch stream errors
