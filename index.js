@@ -1,18 +1,13 @@
+var generators = require('./lib/generators');
 
-var bun = require('bun'),
-    generators = require('./lib/generators');
-
+/*
+ * The schema of the exported object, thought it's now a little cumbersome, is
+ * preserved for backwards compatibility.
+ */
 var suggester = {
-  streams: {
-    suggestable: require('./streams/suggestable'),
-    suggester: require('./streams/suggester')
-  },
+  streams: { suggester: require('./streams/suggester') },
   generators: generators
 };
-
-suggester.pipeline = bun([
-  suggester.streams.suggestable(),
-  suggester.streams.suggester( generators )
-]);
+suggester.pipeline = suggester.streams.suggester( generators );
 
 module.exports = suggester;
