@@ -1,15 +1,19 @@
+var tape = require( 'tape' );
+var util = require( 'util' );
 
-var tape = require('tape');
-
-var common = {};
-
-var tests = [
-  require('./interface.js'),
-  require('./suggester.js'),
-  require('./lib/generators.js'),
-  require('./lib/weightGenerator.js')
+var testModulePaths = [
+  './interface.js'
+  // './suggester.js',
+  // './lib/generators.js',
+  // './lib/weightGenerator.js'
 ];
 
-tests.map(function(t) {
-  t.all(tape, common);
+testModulePaths.forEach( function( modulePath ) {
+  var tests = require( modulePath );
+  for( var funcName in tests ){
+    var testName = util.format(
+      'module: %s, function: %s', modulePath, funcName
+    );
+    tape( testName, tests[ funcName ] );
+  }
 });
