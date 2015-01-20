@@ -1,7 +1,6 @@
 var suggester = require('../lib/suggester'),
   through = require('through2'),
-  generators = require('../lib/generators'),
-  fixtures = require('./fixtures');
+  generators = require('../lib/generators');
 
 tests = {};
 
