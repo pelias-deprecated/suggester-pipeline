@@ -4,7 +4,7 @@
 
 var suggester = require('../');
 
-tests = {};
+var tests = {};
 
 tests[ 'exports an object with expected properties' ] = function(t) {
   t.equal(typeof suggester, 'object', 'is an object');
