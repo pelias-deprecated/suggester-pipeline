@@ -26,7 +26,6 @@
     "npm": ">=1.4.3"
   },
   "dependencies": {
-    "bun": "0.0.10",
     "through2": "^0.5.1"
   },
   "devDependencies": {
