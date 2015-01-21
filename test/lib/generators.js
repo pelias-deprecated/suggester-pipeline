@@ -4,7 +4,7 @@
 
 var generators = require('../../lib/generators');
 
-tests = {};
+var tests = {};
 
 tests.interface = function(t) {
   t.equal(typeof generators, 'object', 'valid object');

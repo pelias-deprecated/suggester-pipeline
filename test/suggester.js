@@ -2,7 +2,7 @@ var suggester = require('../lib/suggester'),
   through = require('through2'),
   generators = require('../lib/generators');
 
-tests = {};
+var tests = {};
 
 tests[ 'valid `module.exports`' ] = function(t) {
   t.equal(typeof suggester, 'function', 'is a function');
