@@ -1,18 +1,12 @@
-
-var bun = require('bun'),
-    generators = require('./lib/generators');
+var generators = require('./lib/generators');
+var suggester = require('./lib/suggester');
 
 var suggester = {
   streams: {
-    suggestable: require('./streams/suggestable'),
-    suggester: require('./streams/suggester')
+    suggester: suggester
   },
-  generators: generators
+  generators: generators,
+  pipeline: suggester( generators )
 };
-
-suggester.pipeline = bun([
-  suggester.streams.suggestable(),
-  suggester.streams.suggester( generators )
-]);
 
 module.exports = suggester;

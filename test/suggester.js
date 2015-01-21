@@ -1,88 +1,61 @@
+var suggester = require('../lib/suggester'),
+  through = require('through2'),
+  generators = require('../lib/generators');
 
-var suggester = require('../streams/suggester'),
-    through = require('through2'),
-    generators = require('../lib/generators'),
-    fixtures = require('./fixtures');
+tests = {};
 
-module.exports.suggester = {};
+tests[ 'valid `module.exports`' ] = function(t) {
+  t.equal(typeof suggester, 'function', 'is a function');
+  t.end();
+};
 
-module.exports.suggester.interface = function(test, common) {
-  test('suggester', function(t) {
-    t.equal(typeof suggester, 'function', 'valid function');
-    t.end();
+tests[ 'constructor returns expected stream' ] = function(t) {
+  var stream = suggester( generators );
+  t.equal(typeof stream._read, 'function', 'is readable');
+  t.equal(typeof stream._write, 'function', 'is writeable');
+  t.end();
+};
+
+tests[ 'suggester throws exception on bad properties' ] = function ( t ){
+  var suggesterStream = suggester();
+  var objects = [ {}, {type: ''}, {id: ''} ];
+
+  objects.forEach( function ( obj ){
+    t.throws(
+      suggesterStream.write.bind( null, obj ), null,
+      'Throws exception on objects without `_meta.id` or `_meta.type`.'
+    );
   });
-};
 
-module.exports.suggester.contructor = function(test, common) {
-  test('suggester()', function(t) {
-    var stream = suggester( generators );
-    t.equal(typeof stream._read, 'function', 'valid readable');
-    t.equal(typeof stream._write, 'function', 'valid writeable');
-    t.end();
+  objects = [ {}, { name: { default: 1 } } ];
+  objects.forEach( function ( obj ){
+    t.throws(
+      suggesterStream.write.bind( null, obj ), null,
+      'Throws exception on objects without a `string` `name.default`.'
+    );
   });
+
+  t.end();
 };
 
-// @note: test will fail if t.end is called multiple times
-module.exports.suggester.notsuggestable = function(test, common) {
-  test('not suggestable', function(t) {
-    var stream = suggester( generators );
-    var record = { _meta: { suggestable: false } };
+tests[ 'suggester builds `suggest` property' ] = function ( t ){
+  var suggesterStream = suggester( generators );
+  var input = {
+    _meta: {
+      id: null,
+      type: null
+    },
+    name: {
+      default: ''
+    }
+  };
 
-    // ensure 'invalid' event not emitted
-    stream.on( 'invalid', t.end );
-
-    // ensure error is not emitted
-    stream.on( 'error', t.end );
-
-    // suggester not run on records where _meta.suggestable!=true
-    stream.pipe( through.obj( function( chunk, enc, done ){
-      t.equal( chunk._meta.suggester, undefined, 'suggester not run' );
-      t.end();
-    }));
-
-    // write an invalid record
-    stream.write( record, 'utf8' );
-  });
+  suggesterStream.write( input );
+  var output = suggesterStream.read();
+  t.ok( 'suggest' in output, 'outbound record contains `suggest`' );
+  t.ok( 'input' in output.suggest, '`suggest` contains `input`.' );
+  t.ok( 'output' in output.suggest, '`suggest` contains `output`.' );
+  t.end();
 };
 
-module.exports.suggester.valid = function(test, common) {
-  test('suggester should run', function(t) {
-
-    fixtures.forEach( function( fixture, i ){
-      var stream = suggester( generators );
-
-      // @todo: better tests & code for when some of these
-      // properties are incorrectly set.
-      // eg. type, id, center_point etc.
-      t.equal( fixture.input._meta.suggestable, true, 'I screwed up the test' );
-
-      // ensure 'invalid' event not emitted
-      stream.on( 'invalid', t.end );
-
-      // ensure error is not emitted
-      stream.on( 'error', t.end );
-
-      // ensure the suggest data is correct
-      stream.pipe( through.obj( function( chunk, enc, done ){
-        t.equal( typeof chunk.suggest, 'object', 'suggest object created' );
-        t.deepEqual( chunk.suggest, fixture.output, 'fixture ' + (i+1) );
-      }));
-
-      // write a valid record
-      stream.write( fixture.input, 'utf8' );
-    });
-
-    t.end();
-  });
-};
-
-module.exports.all = function (tape, common) {
-
-  function test(name, testFunction) {
-    return tape('suggester: ' + name, testFunction);
-  }
-
-  for( var testCase in module.exports.suggester ){
-    module.exports.suggester[testCase](test, common);
-  }
-};
+module.exports = tests;
