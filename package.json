@@ -31,6 +31,7 @@
   },
   "devDependencies": {
     "tape": "^2.13.4",
+    "precommit-hook": "1.0.7",
     "tap-spec": "^0.2.0"
   }
 }
