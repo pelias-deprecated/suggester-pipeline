@@ -37,12 +37,12 @@ tests[ 'assigns expected weights to different types and population' ] = function
   var testCases = {
     default: [{ _meta: {} }, 0],
     geoname:  [{ _meta: { type: 'geoname' }, population: 0 }, 0],
-    geoname1: [{ _meta: { type: 'geoname' }, population: 10000 }, 1],
-    geoname2: [{ _meta: { type: 'geoname' }, population: 14000 }, 2],
-    geoname3: [{ _meta: { type: 'geoname' }, population: 30000 }, 3],
+    geoname1: [{ _meta: { type: 'geoname' }, population: 10000 }, 10],
+    geoname2: [{ _meta: { type: 'geoname' }, population: 14000 }, 14],
+    geoname3: [{ _meta: { type: 'geoname' }, population: 30000 }, 30],
     geoname4: [{ _meta: { type: 'geoname' }, population: 100 }, 1],
     geoname5: [{ _meta: { type: 'geoname' }, population: 1 }, 1],
-    geoname6: [{ _meta: { type: 'geoname' }, population: 234000 }, 24],
+    geoname6: [{ _meta: { type: 'geoname' }, population: 234000 }, 234],
     geoname7: [{ _meta: { type: 'geoname' }, population: -1 }, 0],
     geoname8: [{ _meta: { type: 'geoname' }, population: NaN }, 0],
     admin0: [{ _meta: { type: 'admin0' } }, 2],
@@ -53,7 +53,7 @@ tests[ 'assigns expected weights to different types and population' ] = function
     locality: [{ _meta: { type: 'locality' } }, 12]
   };
 
-  var large_population = 10000;
+  var large_population = 1000;
 
   t.plan( Object.keys( testCases ).length );
   for( var key in testCases ){
