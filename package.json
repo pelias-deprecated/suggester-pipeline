@@ -26,8 +26,7 @@
     "npm": ">=1.4.3"
   },
   "dependencies": {
-    "through2": "^0.5.1",
-    "pelias-model": "git://github.com/pelias/model#multiplier"
+    "through2": "^0.5.1"
   },
   "devDependencies": {
     "tape": "^2.13.4",
