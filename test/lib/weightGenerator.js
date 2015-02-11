@@ -33,4 +33,35 @@ tests[ 'assigns expected weights to different types' ] = function ( t ){
   }
 };
 
+tests[ 'assigns expected weights to different types and population' ] = function ( t ){
+  var testCases = {
+    default: [{ _meta: {} }, 0],
+    geoname:  [{ _meta: { type: 'geoname' }, population: 0 }, 0],
+    geoname1: [{ _meta: { type: 'geoname' }, population: 10000 }, 10],
+    geoname2: [{ _meta: { type: 'geoname' }, population: 14000 }, 14],
+    geoname3: [{ _meta: { type: 'geoname' }, population: 30000 }, 30],
+    geoname4: [{ _meta: { type: 'geoname' }, population: 100 }, 1],
+    geoname5: [{ _meta: { type: 'geoname' }, population: 1 }, 1],
+    geoname6: [{ _meta: { type: 'geoname' }, population: 234000 }, 234],
+    geoname7: [{ _meta: { type: 'geoname' }, population: -1 }, 0],
+    geoname8: [{ _meta: { type: 'geoname' }, population: NaN }, 0],
+    admin0: [{ _meta: { type: 'admin0' } }, 2],
+    admin1: [{ _meta: { type: 'admin1' } }, 14],
+    admin2: [{ _meta: { type: 'admin2' } }, 12],
+    osmway: [{ _meta: { type: 'osmway' }, id: 'something-poi-address' }, 8],
+    osmnode: [{ _meta: { type: 'osmnode' }, id: 1, population: 0 }, 6],
+    locality: [{ _meta: { type: 'locality' } }, 12]
+  };
+
+  var large_population = 1000;
+
+  t.plan( Object.keys( testCases ).length );
+  for( var key in testCases ){
+    var testCase = testCases[ key ];
+    var actual = weightGenerator( testCase[ 0 ] );
+    var expected = testCase[ 1 ];
+    t.equal( actual, expected, key + ': weight matches expected.' );
+  }
+};
+
 module.exports = tests;
