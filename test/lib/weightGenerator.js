@@ -34,17 +34,20 @@ tests[ 'assigns expected weights to different types' ] = function ( t ){
 };
 
 tests[ 'assigns expected weights to different types and population' ] = function ( t ){
+  var expected_result = function(pop) {
+    return pop ? Math.log(pop + 1) : 0;
+  };
   var testCases = {
     default: [{ _meta: {} }, 0],
     geoname:  [{ _meta: { type: 'geoname' }, population: 0 }, 0],
-    geoname1: [{ _meta: { type: 'geoname' }, population: 10000 }, 10],
-    geoname2: [{ _meta: { type: 'geoname' }, population: 14000 }, 14],
-    geoname3: [{ _meta: { type: 'geoname' }, population: 30000 }, 30],
-    geoname4: [{ _meta: { type: 'geoname' }, population: 100 }, 1],
-    geoname5: [{ _meta: { type: 'geoname' }, population: 1 }, 1],
-    geoname6: [{ _meta: { type: 'geoname' }, population: 234000 }, 234],
-    geoname7: [{ _meta: { type: 'geoname' }, population: -1 }, 0],
-    geoname8: [{ _meta: { type: 'geoname' }, population: NaN }, 0],
+    geoname1: [{ _meta: { type: 'geoname' }, population: 10000 }, expected_result(10000)],
+    geoname2: [{ _meta: { type: 'geoname' }, population: 14000 }, expected_result(14000)],
+    geoname3: [{ _meta: { type: 'geoname' }, population: 30000 }, expected_result(30000)],
+    geoname4: [{ _meta: { type: 'geoname' }, population: 100 }, expected_result(100)],
+    geoname5: [{ _meta: { type: 'geoname' }, population: 1 }, expected_result(1)],
+    geoname6: [{ _meta: { type: 'geoname' }, population: 234000 }, expected_result(234000)],
+    geoname7: [{ _meta: { type: 'geoname' }, population: -1 }, expected_result(-1)],
+    geoname8: [{ _meta: { type: 'geoname' }, population: NaN }, expected_result(NaN)],
     admin0: [{ _meta: { type: 'admin0' } }, 2],
     admin1: [{ _meta: { type: 'admin1' } }, 14],
     admin2: [{ _meta: { type: 'admin2' } }, 12],
@@ -52,8 +55,6 @@ tests[ 'assigns expected weights to different types and population' ] = function
     osmnode: [{ _meta: { type: 'osmnode' }, id: 1, population: 0 }, 6],
     locality: [{ _meta: { type: 'locality' } }, 12]
   };
-
-  var large_population = 1000;
 
   t.plan( Object.keys( testCases ).length );
   for( var key in testCases ){
