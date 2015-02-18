@@ -21,3 +21,12 @@ won't turn up in suggest results. All inbound records must contain the following
 
 And will receive a `suggest` property mapped to an object. If you're using
 [pelias-model](https://github.com/pelias/model), everything will work right out of the box.
+
+## example usage
+```javascript
+var peliasSuggesterPipeline = require( 'pelias-suggester-pipeline' );
+
+someDocumentStream
+	.pipe( peliasSuggesterPipeline.pipeline )
+	.pipe( /* rest of pelias pipeline */ );
+```
