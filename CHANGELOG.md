@@ -1,3 +1,6 @@
+2.0.3
+  - Using a logarithmic scale for weights
+
 2.0.2
   - Export weights
 
