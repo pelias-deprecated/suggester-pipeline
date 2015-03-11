@@ -35,7 +35,7 @@ tests[ 'assigns expected weights to different types' ] = function ( t ){
 
 tests[ 'assigns expected weights to different types and population' ] = function ( t ){
   var expected_result = function(pop) {
-    return pop ? Math.log(pop + 1) : 0;
+    return pop ? Math.round(Math.log(pop + 1)) : 0;
   };
   var testCases = {
     default: [{ _meta: {} }, 0],
