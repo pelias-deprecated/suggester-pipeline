@@ -14,7 +14,8 @@ var testModulePaths = [
   './interface.js',
   './suggester.js',
   './lib/generators.js',
-  './lib/weightGenerator.js'
+  './lib/weightGenerator.js',
+  './lib/inputGenerator.js'
 ];
 
 testModulePaths.forEach( function( modulePath ) {
